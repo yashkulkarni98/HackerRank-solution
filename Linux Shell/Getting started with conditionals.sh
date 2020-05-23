@@ -1,11 +1,8 @@
-read x
-read y
-if [ $x -lt $y ]
+read a
+
+if [ "$a" = "Y" ] || [ "$a" = "y" ]
 then
-echo "X is less than Y"
-elif [ $x -eq $y ]
-then
-echo "X is equal to Y"
+    echo "YES"
 else
-echo "X is greater than Y"
+    echo "NO"
 fi
