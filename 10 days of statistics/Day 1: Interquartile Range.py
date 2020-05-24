@@ -1,12 +1,31 @@
-import statistics;
-n = int(input())
-x = list(map(int, input().split()))
-f = list(map(int, input().split()))
-l = [];
-for i in range(n):
-    l += [x[i]] * f[i];
+#!/bin/python3
+import statistics
 
-m = statistics.median(l)
-L = (j for j in l if j < m)
-U = (j for j in l if j > m)
-print(round(statistics.median(U) - statistics.median(L), 1))
+L = list()
+U = list()
+S = list()
+
+N = int(input().strip())
+X = [int(e) for e in input().split(' ')]
+F = [int(e) for e in input().split(' ')]
+
+def freq_append(val, freq):
+    for x in range(freq):
+        S.append(val)
+
+for i in range(N):
+    freq_append(X[i], F[i])
+
+median = statistics.median(S)
+
+for x in S:
+    if x < median:
+        L.append(x)
+    elif x > median:
+        U.append(x)
+
+Q1 = statistics.median(L)
+Q2 = median
+Q3 = statistics.median(U)
+
+print(Q3 - Q1)
