@@ -1,31 +1,23 @@
-from __future__ import division
+def median(l):
+    n = len(l)
+    mid = n // 2
+    if n % 2 == 0:
+        return sum(l[mid-1:mid+1]) / 2
+    else:
+        return l[mid]
 
-def get_median(a):
-    #print a
-    n = len(a)
-    median = a[n//2]
-    #print median
-    if n%2 == 0:
-        #print a[n/2-1:n/2]
-        median = sum(a[n//2-1:n//2+1])/2
-    return median
-        
-n = int(raw_input())
-a = map(int, raw_input().split())
-freq = map(int, raw_input().split())
-array = []
-for i in range(n):
-    array.extend([a[i] for x in range(freq[i])])
-array.sort()
-n = len(array)
-#print array, n
-median = get_median(array)
-l = [x for x in array[0:n//2] if x < median]
-r = [x for x in array[n//2+1:n] if x > median]
-if n % 2 == 0:
-    l = [x for x in array[0:n//2] if x < median]
-    r = [x for x in array[n//2:n] if x > median]
+def quartiles(data):
+    n = len(data)
+    mid = n // 2
+    return [float(median(q)) for q in [data[0:mid], data, data[mid+(n%2):]]]
+    
+n = int(input())
+X = [int(x) for x in input().split(" ")]
+F = [int(f) for f in input().split(" ")]
 
-#print l, get_median(l)
-#print r, get_median(r)
-print round(get_median(r) - get_median(l), 1)
+S = []
+for i,n in enumerate(X):
+    S += F[i] * [n]
+
+q = quartiles(sorted(S))
+print(q[2] - q[0])
